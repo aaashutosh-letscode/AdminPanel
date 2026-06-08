@@ -1,14 +1,25 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+import { 
+  LayoutDashboard, 
+  UtensilsCrossed, 
+  ShoppingCart, 
+  BadgePercent, 
+  LayoutTemplate, 
+  Settings,
+  LogOut,
+  ChevronLeft,
+  ChevronRight
+} from 'lucide-react';
 import './Sidebar.css';
 
 const menuItems = [
-  { name: 'Dashboard', path: '/dashboard' },
-  { name: 'Menu', path: '/menu' },
-  { name: 'Orders', path: '/orders' },
-  { name: 'Offers', path: '/offers' },
-  { name: 'Home CMS', path: '/home-cms' },
-  { name: 'Settings', path: '/settings' }
+  { name: 'Dashboard', path: '/dashboard', icon: LayoutDashboard },
+  { name: 'Menu', path: '/menu', icon: UtensilsCrossed },
+  { name: 'Orders', path: '/orders', icon: ShoppingCart },
+  { name: 'Offers', path: '/offers', icon: BadgePercent },
+  { name: 'Home CMS', path: '/home-cms', icon: LayoutTemplate },
+  { name: 'Settings', path: '/settings', icon: Settings }
 ];
 
 const Sidebar = ({ collapsed, open, onToggle, onClose }) => {
@@ -16,32 +27,46 @@ const Sidebar = ({ collapsed, open, onToggle, onClose }) => {
     <aside className={`sidebar ${collapsed ? 'collapsed' : ''} ${open ? 'open' : ''}`}>
       <div className="sidebar-brand">
         <div className="sidebar-logo">R</div>
-        <div className="sidebar-title">
-          <span>Restaurant</span>
-          <strong>Master</strong>
-        </div>
+        {!collapsed && (
+          <div className="sidebar-title">
+            <span>Restaurant</span>
+            <strong>Master</strong>
+          </div>
+        )}
       </div>
+
       <nav className="sidebar-nav">
-        {menuItems.map((item) => (
-          <NavLink
-            key={item.path}
-            to={item.path}
-            className={({ isActive }) => `sidebar-link ${isActive ? 'active' : ''}`}
-            onClick={onClose}
-          >
-            <span className="sidebar-icon">{item.name.charAt(0)}</span>
-            <span className="sidebar-label">{item.name}</span>
-          </NavLink>
-        ))}
+        {menuItems.map((item) => {
+          const Icon = item.icon;
+          return (
+            <NavLink
+              key={item.path}
+              to={item.path}
+              className={({ isActive }) => `sidebar-link ${isActive ? 'active' : ''}`}
+              onClick={onClose}
+              title={collapsed ? item.name : ''}
+            >
+              <Icon className="sidebar-icon" size={20} />
+              {!collapsed && <span className="sidebar-label">{item.name}</span>}
+            </NavLink>
+          );
+        })}
       </nav>
+
       <div className="sidebar-footer">
-        <button className="sidebar-logout" type="button">
-          <span>Logout</span>
+        <button className="sidebar-logout" type="button" title="Logout">
+          <LogOut size={20} />
+          {!collapsed && <span>Logout</span>}
+        </button>
+        <button 
+          className="sidebar-collapse" 
+          type="button" 
+          onClick={onToggle}
+          title={collapsed ? 'Expand' : 'Collapse'}
+        >
+          {collapsed ? <ChevronRight size={20} /> : <ChevronLeft size={20} />}
         </button>
       </div>
-      <button className="sidebar-collapse" type="button" onClick={onToggle}>
-        <span>{collapsed ? 'Expand' : 'Collapse'}</span>
-      </button>
     </aside>
   );
 };

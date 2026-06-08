@@ -1,4 +1,5 @@
 import React from 'react';
+import { ShoppingCart, TrendingUp, Users, BarChart3 } from 'lucide-react';
 import PageHeader from '../../components/shared/PageHeader/PageHeader';
 import StatCard from '../../components/shared/StatCard/StatCard';
 import ChartCard from '../../components/shared/ChartCard/ChartCard';
@@ -8,11 +9,18 @@ import { dashboardStats, recentOrders } from '../../services/api';
 import './DashboardPage.css';
 
 const DashboardPage = () => {
+  const statIcons = {
+    'Total Orders': ShoppingCart,
+    'Revenue': TrendingUp,
+    'Customers': Users,
+    'Conversion': BarChart3
+  };
+
   const orderColumns = [
     { key: 'id', title: 'Order ID', dataIndex: 'id' },
     { key: 'customer', title: 'Customer', dataIndex: 'customer' },
     { key: 'date', title: 'Date', dataIndex: 'date' },
-    { key: 'amount', title: 'Amount', dataIndex: 'amount' },
+    { key: 'amount', title: 'Amount', dataIndex: 'amount', align: 'right' },
     { key: 'payment', title: 'Payment', dataIndex: 'payment' },
     {
       key: 'status',
@@ -28,7 +36,16 @@ const DashboardPage = () => {
         <div className="dashboard-left">
           <div className="stats-row">
             {dashboardStats.map((stat) => (
-              <StatCard key={stat.label} title={stat.label} value={stat.value} badge={stat.change} color={stat.color} detail={stat.trend === 'up' ? 'Growth over last 24 hours' : 'Recent change in performance'} />
+              <StatCard 
+                key={stat.label} 
+                title={stat.label} 
+                value={stat.value} 
+                badge={stat.change} 
+                color={stat.color} 
+                detail={stat.trend === 'up' ? '+12.5% this month' : '-2.3% this month'}
+                trend={stat.trend}
+                icon={statIcons[stat.label] || ShoppingCart}
+              />
             ))}
           </div>
           <div className="dashboard-cards">

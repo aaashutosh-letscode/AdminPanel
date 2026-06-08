@@ -9,17 +9,17 @@
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  margin-left: 260px;
-  transition: margin-left 0.3s ease;
+  margin-left: 240px;
+  transition: margin-left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .admin-container.collapsed {
-  margin-left: 90px;
+  margin-left: 80px;
 }
 
 .admin-page-shell {
   flex: 1;
-  padding: 24px 32px 32px;
+  padding: 28px 32px;
   width: 100%;
   max-width: 1680px;
   margin: 0 auto;
@@ -28,5 +28,15 @@
 @media (max-width: 1200px) {
   .admin-container {
     margin-left: 0;
+  }
+
+  .admin-page-shell {
+    padding: 20px 24px;
+  }
+}
+
+@media (max-width: 768px) {
+  .admin-page-shell {
+    padding: 16px 16px;
   }
 }

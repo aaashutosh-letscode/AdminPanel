@@ -2,36 +2,108 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  gap: 8px;
   border: none;
-  border-radius: 14px;
-  padding: 12px 18px;
-  font-size: 14px;
-  font-weight: 700;
+  font-weight: 600;
   cursor: pointer;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+  font-size: 14px;
 }
 
 .btn:hover {
   transform: translateY(-1px);
 }
 
+.btn:active {
+  transform: translateY(0);
+}
+
+/* Size Variants */
+.btn-small {
+  padding: 8px 14px;
+  border-radius: var(--radius);
+  font-size: 13px;
+}
+
+.btn-medium {
+  padding: 10px 18px;
+  border-radius: var(--radius-lg);
+  font-size: 14px;
+}
+
+.btn-large {
+  padding: 12px 24px;
+  border-radius: var(--radius-lg);
+  font-size: 15px;
+}
+
+/* Color Variants */
 .btn-primary {
-  background: linear-gradient(135deg, #ff4b3e 0%, #ff6a3d 100%);
+  background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
   color: #ffffff;
+  box-shadow: 0 2px 4px rgba(255, 75, 62, 0.2);
+}
+
+.btn-primary:hover {
+  box-shadow: 0 4px 12px rgba(255, 75, 62, 0.25);
+  background: linear-gradient(135deg, var(--primary-hover) 0%, #ff5a4d 100%);
 }
 
 .btn-secondary {
-  background: #5b2eff;
+  background: linear-gradient(135deg, var(--purple) 0%, #7c3aff 100%);
   color: #ffffff;
+  box-shadow: 0 2px 4px rgba(91, 46, 255, 0.2);
+}
+
+.btn-secondary:hover {
+  box-shadow: 0 4px 12px rgba(91, 46, 255, 0.25);
+  filter: brightness(1.05);
 }
 
 .btn-outline {
   background: transparent;
-  border: 1px solid #e5e7eb;
-  color: #111827;
+  border: 1.5px solid var(--border);
+  color: var(--text-primary);
+}
+
+.btn-outline:hover {
+  border-color: var(--text-primary);
+  background: var(--surface);
 }
 
 .btn-ghost {
-  background: rgba(15, 23, 42, 0.04);
-  color: #111827;
+  background: transparent;
+  color: var(--text-primary);
+}
+
+.btn-ghost:hover {
+  background: var(--surface);
+}
+
+.btn-danger {
+  background: var(--danger);
+  color: #ffffff;
+  box-shadow: 0 2px 4px rgba(239, 68, 68, 0.2);
+}
+
+.btn-danger:hover {
+  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.25);
+  filter: brightness(0.95);
+}
+
+.btn-success {
+  background: var(--success);
+  color: #ffffff;
+  box-shadow: 0 2px 4px rgba(16, 185, 129, 0.2);
+}
+
+.btn-success:hover {
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.25);
+  filter: brightness(0.95);
+}
+
+.btn-icon {
+  width: 18px;
+  height: 18px;
 }

@@ -1,12 +1,26 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './FormInput.css';
 
-const FormInput = ({ label, value, onChange, placeholder, type = 'text', ...props }) => {
+const FormInput = ({ label, value, onChange, placeholder, type = 'text', error, icon: Icon, ...props }) => {
+  const [isFocused, setIsFocused] = useState(false);
+
   return (
-    <label className="form-input-label">
-      <span>{label}</span>
-      <input type={type} value={value} onChange={onChange} placeholder={placeholder} {...props} />
-    </label>
+    <div className="form-input-wrapper">
+      {label && <label className="form-input-label">{label}</label>}
+      <div className={`form-input-field ${isFocused ? 'focused' : ''} ${error ? 'error' : ''}`}>
+        {Icon && <Icon className="input-icon" />}
+        <input 
+          type={type} 
+          value={value} 
+          onChange={onChange} 
+          placeholder={placeholder}
+          onFocus={() => setIsFocused(true)}
+          onBlur={() => setIsFocused(false)}
+          {...props} 
+        />
+      </div>
+      {error && <span className="input-error">{error}</span>}
+    </div>
   );
 };
 
