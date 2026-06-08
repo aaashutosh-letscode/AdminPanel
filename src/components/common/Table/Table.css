@@ -1,0 +1,37 @@
+.table-scroll {
+  overflow-x: auto;
+  border-radius: 20px;
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+}
+
+.table-component {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 760px;
+}
+
+.table-component th,
+.table-component td {
+  padding: 18px 20px;
+  text-align: left;
+  border-bottom: 1px solid #f3f4f6;
+  color: #374151;
+  font-size: 14px;
+}
+
+.table-component th {
+  background: #f8fafc;
+  color: #6b7280;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+}
+
+.table-component tr:hover {
+  background: rgba(251, 241, 235, 0.6);
+}
+
+.table-component td:last-child,
+.table-component th:last-child {
+  text-align: right;
+}

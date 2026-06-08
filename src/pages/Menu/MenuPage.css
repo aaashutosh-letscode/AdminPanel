@@ -1,0 +1,91 @@
+.menu-page {
+  display: grid;
+  gap: 24px;
+}
+
+.menu-grid {
+  display: grid;
+  grid-template-columns: 1.35fr 0.65fr;
+  gap: 24px;
+}
+
+.menu-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.menu-actions {
+  margin-left: auto;
+  display: flex;
+  gap: 12px;
+}
+
+.menu-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.filter-pill {
+  border: 1px solid #e5e7eb;
+  background: #ffffff;
+  border-radius: 999px;
+  padding: 12px 18px;
+  color: #374151;
+  cursor: pointer;
+}
+
+.filter-pill.active {
+  background: linear-gradient(135deg, #ff4b3e 0%, #ff6a3d 100%);
+  color: #ffffff;
+  border-color: transparent;
+}
+
+.menu-table-card,
+.editor-card {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 24px;
+  box-shadow: var(--shadow);
+  padding: 24px;
+}
+
+.editor-body {
+  display: grid;
+  gap: 16px;
+  margin-top: 16px;
+}
+
+.editor-footer {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  margin-top: 24px;
+}
+
+.menu-image {
+  width: 44px;
+  height: 44px;
+  border-radius: 16px;
+  background: #f8fafc;
+  display: grid;
+  place-items: center;
+}
+
+.ghost-button {
+  border: 1px solid #e5e7eb;
+  background: transparent;
+  border-radius: 14px;
+  padding: 10px 14px;
+  color: #111827;
+}
+
+@media (max-width: 1040px) {
+  .menu-grid {
+    grid-template-columns: 1fr;
+  }
+}

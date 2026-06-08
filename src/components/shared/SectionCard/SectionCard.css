@@ -1,0 +1,58 @@
+.section-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 18px;
+  padding: 18px 20px;
+  border-radius: 18px;
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+}
+
+.section-card-main {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.section-icon {
+  width: 52px;
+  height: 52px;
+  border-radius: 18px;
+  background: #eef2ff;
+  display: grid;
+  place-items: center;
+  font-weight: 700;
+  color: #3730a3;
+}
+
+.section-card h3 {
+  margin: 0 0 8px;
+  font-size: 16px;
+  color: #111827;
+}
+
+.section-card-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.secondary-button,
+.ghost-button {
+  padding: 10px 16px;
+  border-radius: 14px;
+  border: 1px solid transparent;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.secondary-button {
+  background: #ff6a3d;
+  color: #ffffff;
+}
+
+.ghost-button {
+  background: transparent;
+  color: #6b7280;
+  border-color: #e5e7eb;
+}

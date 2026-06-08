@@ -1,0 +1,138 @@
+.orders-page {
+  display: grid;
+  gap: 24px;
+}
+
+.orders-grid {
+  display: grid;
+  grid-template-columns: 1.25fr 0.75fr;
+  gap: 24px;
+}
+
+.orders-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 18px;
+  margin-bottom: 20px;
+}
+
+.orders-stat-card {
+  padding: 22px;
+  border-radius: 22px;
+  background: #ffffff;
+  box-shadow: var(--shadow);
+  border: 1px solid transparent;
+}
+
+.orders-stat-card span {
+  display: block;
+  color: #6b7280;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+.orders-stat-card strong {
+  font-size: 24px;
+}
+
+.orders-controls {
+  display: grid;
+  gap: 18px;
+  margin-bottom: 20px;
+}
+
+.orders-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.orders-filters select {
+  min-width: 160px;
+  padding: 12px 14px;
+  border-radius: 16px;
+  border: 1px solid #e5e7eb;
+  background: #ffffff;
+}
+
+.orders-table-card,
+.order-detail-card {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 24px;
+  box-shadow: var(--shadow);
+  padding: 24px;
+}
+
+.panel-headline span {
+  display: block;
+  color: #6b7280;
+  font-size: 12px;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.panel-headline strong {
+  font-size: 22px;
+}
+
+.detail-grid,
+.summary-grid {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.detail-label {
+  color: #6b7280;
+  margin-bottom: 8px;
+}
+
+.detail-block ul {
+  padding-left: 18px;
+  margin: 0;
+  color: #374151;
+}
+
+.total-row {
+  padding-top: 14px;
+  border-top: 1px solid #f3f4f6;
+  margin-top: 12px;
+}
+
+.status-update {
+  margin-top: 20px;
+  display: grid;
+  gap: 10px;
+}
+
+.status-update select {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 16px;
+  border: 1px solid #e5e7eb;
+}
+
+.detail-note {
+  margin-top: 18px;
+  color: #6b7280;
+  display: grid;
+  gap: 8px;
+}
+
+.ghost-button {
+  border: 1px solid #e5e7eb;
+  background: transparent;
+  border-radius: 14px;
+  padding: 10px 14px;
+  color: #111827;
+}
+
+@media (max-width: 1040px) {
+  .orders-grid {
+    grid-template-columns: 1fr;
+  }
+}

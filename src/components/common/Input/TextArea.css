@@ -1,0 +1,23 @@
+.textarea-label {
+  display: grid;
+  gap: 8px;
+  font-size: 13px;
+  color: #374151;
+}
+
+.textarea-label textarea {
+  width: 100%;
+  min-height: 120px;
+  padding: 14px 16px;
+  border: 1px solid #e5e7eb;
+  border-radius: 16px;
+  font-size: 14px;
+  color: #111827;
+  background: #ffffff;
+  resize: vertical;
+}
+
+.textarea-label textarea:focus {
+  outline: 2px solid rgba(91, 46, 255, 0.15);
+  border-color: #8b5cf6;
+}
