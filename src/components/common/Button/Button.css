@@ -107,3 +107,7 @@
   width: 18px;
   height: 18px;
 }
+
+.btn-full-width {
+  width: 100%;
+}

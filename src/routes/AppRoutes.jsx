@@ -9,6 +9,7 @@ import HomeCMSPage from '../pages/HomeCMS/HomeCMSPage';
 import SettingsPage from '../pages/Settings/SettingsPage';
 import LoginPage from '../pages/Auth/LoginPage';
 import ForgotPasswordPage from '../pages/Auth/ForgotPasswordPage';
+import ResetPasswordPage from '../pages/Auth/ResetPasswordPage';
 
 const AppRoutes = () => {
   return (
@@ -17,6 +18,7 @@ const AppRoutes = () => {
         {/* Auth Routes */}
         <Route path="/login" element={<LoginPage />} />
         <Route path="/forgot-password" element={<ForgotPasswordPage />} />
+        <Route path="/reset-password/:token" element={<ResetPasswordPage />} />
 
         {/* Admin Routes */}
         <Route path="/" element={<AdminLayout />}>
