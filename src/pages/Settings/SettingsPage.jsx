@@ -17,7 +17,7 @@ const SettingsPage = () => {
             <FormInput label="Restaurant Name" placeholder="The Rustic Table" />
             <FormInput label="Contact Email" placeholder="support@restaurant.com" type="email" />
             <FormInput label="Phone Number" placeholder="(415) 555-0123" type="tel" />
-            <SelectInput label="Default Currency" value="usd" onChange={() => {}} options={[{ value: 'usd', label: 'USD' }, { value: 'eur', label: 'EUR' }]} />
+            <SelectInput label="Default Currency" value="inr" onChange={() => {}} options={[{ value: 'inr', label: 'INR' }, { value: 'usd', label: 'USD' }, { value: 'eur', label: 'EUR' }]} />
             <TextArea label="Store Address" placeholder="123 Market Street, San Francisco" rows={4} />
           </div>
         </div>

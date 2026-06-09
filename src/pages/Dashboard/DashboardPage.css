@@ -8,12 +8,19 @@
   grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
   gap: 16px;
   margin-bottom: 8px;
+  min-width: 0;
 }
 
 .dashboard-grid {
   display: grid;
   grid-template-columns: 1fr 340px;
   gap: 24px;
+  min-width: 0;
+}
+
+.dashboard-left,
+.dashboard-right-panel {
+  min-width: 0;
 }
 
 .dashboard-left {
@@ -74,7 +81,7 @@
   padding: 10px 18px;
   border: 1.5px solid var(--border);
   border-radius: var(--radius-lg);
-  background: transparent;
+  background: #ffffff;
   color: var(--text-primary);
   font-size: 13px;
   font-weight: 600;
@@ -82,11 +89,14 @@
   transition: all 0.2s ease;
   white-space: nowrap;
   flex-shrink: 0;
+  box-shadow: var(--shadow-xs);
 }
 
 .secondary-button:hover {
-  border-color: var(--text-primary);
+  border-color: var(--primary);
   background: var(--surface);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
 }
 
 .insights-row {

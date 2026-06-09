@@ -5,6 +5,16 @@
   border: 1.5px solid var(--border-light);
   box-shadow: var(--shadow-sm);
   transition: all 0.2s ease;
+  min-width: 0;
+}
+
+.chart-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 16px;
+  gap: 12px;
+  min-width: 0;
 }
 
 .chart-card:hover {
@@ -60,13 +70,6 @@
   background: linear-gradient(90deg, var(--primary) 0%, var(--accent) 100%);
   border-radius: 999px;
   transition: width 0.3s ease;
-}
-
-.chart-footnote {
-  font-size: 12px;
-  color: var(--text-tertiary);
-  font-weight: 500;
-}
 }
 
 .chart-footnote {

@@ -11,6 +11,12 @@
   box-shadow: var(--shadow);
   display: grid;
   gap: 24px;
+  min-width: 0;
+}
+
+.settings-grid,
+.settings-footer {
+  min-width: 0;
 }
 
 .settings-section h3 {

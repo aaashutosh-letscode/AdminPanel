@@ -46,6 +46,7 @@ const Table = ({ columns, data, onEdit, onDelete, onView }) => {
                   <td 
                     key={column.key} 
                     className={column.align ? `align-${column.align}` : ''}
+                    data-label={column.title}
                   >
                     {column.render ? column.render(row) : row[column.dataIndex]}
                   </td>

@@ -7,6 +7,16 @@
   display: grid;
   grid-template-columns: 1.35fr 0.65fr;
   gap: 24px;
+  min-width: 0;
+}
+
+.menu-grid > *,
+.menu-toolbar,
+.menu-actions,
+.menu-filters,
+.menu-table-card,
+.editor-card {
+  min-width: 0;
 }
 
 .menu-toolbar {
@@ -20,6 +30,7 @@
 .menu-actions {
   margin-left: auto;
   display: flex;
+  flex-wrap: wrap;
   gap: 12px;
 }
 
@@ -28,6 +39,14 @@
   flex-wrap: wrap;
   gap: 12px;
   margin-bottom: 20px;
+}
+
+.editor-footer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 16px;
+  margin-top: 24px;
 }
 
 .filter-pill {
@@ -77,11 +96,19 @@
 }
 
 .ghost-button {
-  border: 1px solid #e5e7eb;
+  border: 1px solid var(--border);
   background: transparent;
   border-radius: 14px;
   padding: 10px 14px;
-  color: #111827;
+  color: var(--text-primary);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.ghost-button:hover {
+  background: var(--surface);
+  border-color: var(--primary);
+  transform: translateY(-1px);
 }
 
 @media (max-width: 1040px) {

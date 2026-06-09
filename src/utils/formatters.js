@@ -1,6 +1,10 @@
 export const formatCurrency = (value) => {
   if (typeof value === 'number') {
-    return value.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
+    return value.toLocaleString('en-IN', {
+      style: 'currency',
+      currency: 'INR',
+      maximumFractionDigits: 0
+    });
   }
   return value;
 };

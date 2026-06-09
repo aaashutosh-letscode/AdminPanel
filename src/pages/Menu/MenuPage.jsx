@@ -65,7 +65,7 @@ const MenuPage = () => {
             <div className="editor-body">
               <FormInput label="Item Name" placeholder="Enter menu title" />
               <SelectInput label="Category" value="pizza" onChange={() => {}} options={menuCategories.map((item) => ({ value: item.key, label: item.label }))} />
-              <FormInput label="Price" placeholder="$12.00" />
+              <FormInput label="Price" placeholder="₹12.00" />
               <SelectInput label="Availability" value="yes" onChange={() => {}} options={[{ value: 'yes', label: 'Yes' }, { value: 'no', label: 'No' }]} />
               <TextArea label="Short Description" placeholder="Add a short item description." />
               <TextArea label="Full Description" placeholder="Add detailed menu information." rows={6} />

@@ -10,6 +10,7 @@
   justify-content: space-between;
   box-shadow: var(--shadow-sm);
   transition: all 0.2s ease;
+  min-width: 0;
 }
 
 .stat-card:hover {
@@ -41,13 +42,13 @@
 }
 
 .stat-badge {
-  font-size: 11px;
-  color: #ffffff;
-  background: var(--primary);
+  background: rgba(255, 90, 60, 0.12);
+  color: #ff5a3c;
+  border: 1px solid rgba(255, 90, 60, 0.2);
+  padding: 4px 10px;
   border-radius: 999px;
-  padding: 3px 8px;
-  font-weight: 600;
-  white-space: nowrap;
+  font-size: 12px;
+  font-weight: 700;
 }
 
 .stat-card-icon {

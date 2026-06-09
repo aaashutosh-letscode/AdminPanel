@@ -26,11 +26,11 @@ const Sidebar = ({ collapsed, open, onToggle, onClose }) => {
   return (
     <aside className={`sidebar ${collapsed ? 'collapsed' : ''} ${open ? 'open' : ''}`}>
       <div className="sidebar-brand">
-        <div className="sidebar-logo">R</div>
+        <div className="sidebar-logo">tbb</div>
         {!collapsed && (
           <div className="sidebar-title">
-            <span>Restaurant</span>
-            <strong>Master</strong>
+            <span>the butter bowl</span>
+            <strong>Admin Pannel</strong>
           </div>
         )}
       </div>

@@ -7,6 +7,16 @@
   border-radius: 18px;
   background: #ffffff;
   border: 1px solid #e5e7eb;
+  min-width: 0;
+}
+
+.section-card-main {
+  min-width: 0;
+}
+
+.section-card h3 {
+  overflow-wrap: anywhere;
+  word-break: break-word;
 }
 
 .section-card-main {
@@ -41,18 +51,33 @@
 .ghost-button {
   padding: 10px 16px;
   border-radius: 14px;
-  border: 1px solid transparent;
   cursor: pointer;
   font-weight: 600;
+  transition: all 0.2s ease;
 }
 
 .secondary-button {
-  background: #ff6a3d;
-  color: #ffffff;
+  background: #ffffff;
+  color: var(--text-primary);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-xs);
+}
+
+.secondary-button:hover {
+  background: var(--surface);
+  border-color: var(--primary);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
 }
 
 .ghost-button {
   background: transparent;
-  color: #6b7280;
-  border-color: #e5e7eb;
+  color: var(--text-secondary);
+  border: 1px solid transparent;
+}
+
+.ghost-button:hover {
+  background: var(--surface);
+  color: var(--text-primary);
+  transform: translateY(-1px);
 }

@@ -20,6 +20,7 @@ const AdminLayout = () => {
         onToggle={handleToggle}
         onClose={() => setSidebarOpen(false)}
       />
+      <div className={`sidebar-backdrop ${sidebarOpen ? 'visible' : ''}`} onClick={() => setSidebarOpen(false)} />
       <div className={`admin-container ${sidebarCollapsed ? 'collapsed' : ''}`}>
         <Header
           onToggleSidebar={() => setSidebarOpen((current) => !current)}

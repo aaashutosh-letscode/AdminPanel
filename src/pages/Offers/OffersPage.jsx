@@ -75,8 +75,8 @@ const OffersPage = () => {
               <SelectInput label="Offer Type" value="seasonal" onChange={() => {}} options={[{ value: 'seasonal', label: 'Seasonal' }, { value: 'holiday', label: 'Holiday' }]} />
               <SelectInput label="Discount Type" value="percentage" onChange={() => {}} options={[{ value: 'percentage', label: 'Percentage' }, { value: 'fixed', label: 'Fixed Amount' }]} />
               <FormInput label="Discount Value" placeholder="25%" />
-              <FormInput label="Minimum Order" placeholder="$30" />
-              <FormInput label="Maximum Discount" placeholder="$50" />
+              <FormInput label="Minimum Order" placeholder="₹30" />
+              <FormInput label="Maximum Discount" placeholder="₹50" />
               <div className="date-row">
                 <input type="date" />
                 <input type="date" />
