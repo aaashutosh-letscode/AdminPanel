@@ -38,11 +38,61 @@ export const orderStats = [
 ];
 
 export const orders = [
-  { id: "OR-2101", customer: "Olivia M.", date: "06 Jun", amount: "₹112.50", payment: "Card", status: "Pending" },
-  { id: "OR-2102", customer: "Ethan H.", date: "06 Jun", amount: "₹203.20", payment: "Card", status: "Completed" },
-  { id: "OR-2103", customer: "Zoe K.", date: "05 Jun", amount: "₹58.90", payment: "Cash", status: "Preparing" },
-  { id: "OR-2104", customer: "Leo C.", date: "05 Jun", amount: "₹69.75", payment: "Wallet", status: "Cancelled" },
-  { id: "OR-2105", customer: "Emma B.", date: "04 Jun", amount: "₹96.40", payment: "Card", status: "Completed" }
+  {
+    id: "OR-2101", customer: "Olivia M.", date: "06 Jun", amount: "₹1,125", payment: "Card", status: "Pending",
+    email: "olivia.m@example.com", phone: "+91 98765 43210",
+    address: { line1: "742 Maple Street", line2: "San Francisco, CA 94107" },
+    items: [
+      { name: "Truffle Burger", qty: 1, amount: 695 },
+      { name: "Garlic Bread", qty: 1, amount: 180 },
+      { name: "Masala Chai", qty: 1, amount: 130 }
+    ],
+    subtotal: 1005, delivery: 120, total: 1125,
+    transactionId: "TXN-8821"
+  },
+  {
+    id: "OR-2102", customer: "Ethan H.", date: "06 Jun", amount: "₹2,032", payment: "Card", status: "Completed",
+    email: "ethan.h@example.com", phone: "+91 91234 56789",
+    address: { line1: "18 Oak Avenue", line2: "Mumbai, MH 400001" },
+    items: [
+      { name: "Margherita Pizza", qty: 2, amount: 1040 },
+      { name: "Caesar Salad", qty: 1, amount: 475 },
+      { name: "Cotton Candy Shake", qty: 1, amount: 397 }
+    ],
+    subtotal: 1912, delivery: 120, total: 2032,
+    transactionId: "TXN-8822"
+  },
+  {
+    id: "OR-2103", customer: "Zoe K.", date: "05 Jun", amount: "₹589", payment: "Cash", status: "Preparing",
+    email: "zoe.k@example.com", phone: "+91 87654 32100",
+    address: { line1: "55 Ring Road", line2: "Delhi, DL 110001" },
+    items: [
+      { name: "Spicy Chicken Pizza", qty: 1, amount: 520 }
+    ],
+    subtotal: 520, delivery: 69, total: 589,
+    transactionId: "TXN-8823"
+  },
+  {
+    id: "OR-2104", customer: "Leo C.", date: "05 Jun", amount: "₹698", payment: "Wallet", status: "Cancelled",
+    email: "leo.c@example.com", phone: "+91 76543 21098",
+    address: { line1: "12 MG Road", line2: "Bangalore, KA 560001" },
+    items: [
+      { name: "Truffle Burger", qty: 1, amount: 695 }
+    ],
+    subtotal: 695, delivery: 0, total: 698,
+    transactionId: "TXN-8824"
+  },
+  {
+    id: "OR-2105", customer: "Emma B.", date: "04 Jun", amount: "₹964", payment: "Card", status: "Completed",
+    email: "emma.b@example.com", phone: "+91 65432 10987",
+    address: { line1: "8 Lakeview Terrace", line2: "Pune, MH 411001" },
+    items: [
+      { name: "Caesar Salad", qty: 1, amount: 475 },
+      { name: "Cotton Candy Shake", qty: 2, amount: 394 }
+    ],
+    subtotal: 869, delivery: 95, total: 964,
+    transactionId: "TXN-8825"
+  }
 ];
 
 export const offers = [

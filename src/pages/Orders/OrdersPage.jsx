@@ -4,8 +4,7 @@ import SearchBar from '../../components/shared/SearchBar/SearchBar';
 import Table from '../../components/common/Table/Table';
 import Pagination from '../../components/common/Pagination/Pagination';
 import StatusBadge from '../../components/shared/StatusBadge/StatusBadge';
-import Modal from '../../components/common/Modal/Modal';
-import { User, MapPin, List, DollarSign, ClipboardCheck, CreditCard } from 'lucide-react';
+import { User, MapPin, ShoppingBag, CreditCard, ClipboardList, Receipt } from 'lucide-react';
 import { orderStats, orders } from '../../services/api';
 import './OrdersPage.css';
 
@@ -16,12 +15,10 @@ const formatCurrency = (value) => {
     maximumFractionDigits: 0
   });
 
-  if (typeof value === 'number') {
-    return formatter.format(value);
-  }
+  if (typeof value === 'number') return formatter.format(value);
 
   if (typeof value === 'string') {
-    const numeric = Number(value.replace(/[^\\d.-]/g, ''));
+    const numeric = Number(value.replace(/[^\d.-]/g, ''));
     return Number.isNaN(numeric) ? value : formatter.format(numeric);
   }
 
@@ -29,51 +26,40 @@ const formatCurrency = (value) => {
 };
 
 const statusVariant = (status) => {
-  const normalized = String(status).toLowerCase();
-  if (normalized === 'pending') return 'warning';
-  if (normalized === 'confirmed' || normalized === 'completed' || normalized === 'delivered' || normalized === 'preparing') return 'success';
-  if (normalized === 'cancelled') return 'danger';
+  const n = String(status).toLowerCase();
+  if (n === 'pending') return 'warning';
+  if (['confirmed', 'completed', 'delivered', 'preparing'].includes(n)) return 'success';
+  if (n === 'cancelled') return 'danger';
   return 'default';
-};
-
-const orderDetails = {
-  id: 'OR-2102',
-  customer: 'Olivia M.',
-  email: 'olivia.m@example.com',
-  phone: '+91 98765 43210',
-  address: {
-    line1: '742 Maple Street',
-    line2: 'San Francisco, CA 94107',
-    country: 'India'
-  },
-  items: [
-    { name: 'Truffle Burger', qty: 1, amount: 895.5 },
-    { name: 'Margherita Pizza', qty: 1, amount: 520 },
-    { name: 'Cotton Candy Shake', qty: 2, amount: 452 }
-  ],
-  subtotal: 1868,
-  delivery: 120,
-  discount: 0,
-  total: 1988,
-  status: 'Pending',
-  paymentMethod: 'Card',
-  transactionId: 'TXN-9487'
 };
 
 const OrdersPage = () => {
   const [status, setStatus] = useState('all');
   const [payment, setPayment] = useState('all');
-  const [orderStatus, setOrderStatus] = useState(orderDetails.status);
-  const [detailsOpen, setDetailsOpen] = useState(false);
+  const [selectedOrder, setSelectedOrder] = useState(null);
+  const [orderStatus, setOrderStatus] = useState('');
+
+  const handleSelectOrder = (order) => {
+    setSelectedOrder(order);
+    setOrderStatus(order.status);
+  };
 
   const columns = [
-    { key: 'id', title: 'Order ID', dataIndex: 'id' },
+    {
+      key: 'id',
+      title: 'Order ID',
+      render: (row) => (
+        <span className={selectedOrder?.id === row.id ? 'order-id-active' : ''}>
+          {row.id}
+        </span>
+      )
+    },
     { key: 'customer', title: 'Customer', dataIndex: 'customer' },
     { key: 'date', title: 'Date', dataIndex: 'date' },
     {
       key: 'amount',
       title: 'Amount',
-      render: (row) => <span>{formatCurrency(row.amount)}</span>,
+      render: (row) => <span>{row.amount}</span>,
       align: 'right'
     },
     { key: 'payment', title: 'Payment', dataIndex: 'payment' },
@@ -81,33 +67,24 @@ const OrdersPage = () => {
       key: 'status',
       title: 'Status',
       render: (row) => <StatusBadge label={row.status} variant={statusVariant(row.status)} />
-    },
-    {
-      key: 'actions',
-      title: 'Actions',
-      render: () => (
-        <button className="ghost-button small" type="button" onClick={() => setDetailsOpen(true)}>
-          View
-        </button>
-      )
     }
   ];
 
   const filtered = orders.filter((order) =>
-    (status === 'all' || order.status.toLowerCase() === status) && (payment === 'all' || order.payment.toLowerCase() === payment)
+    (status === 'all' || order.status.toLowerCase() === status) &&
+    (payment === 'all' || order.payment.toLowerCase() === payment)
   );
-
-  const itemsCount = orderDetails.items.reduce((sum, item) => sum + item.qty, 0);
 
   return (
     <div className="orders-page">
-      <PageHeader title="Orders" subtitle="Review orders quickly and surface full order context only when needed." />
+      <PageHeader title="Orders" subtitle="Track and manage all restaurant orders." />
 
       <div className="orders-grid">
+        {/* ── Left: Stats + Controls + Table ── */}
         <div className="orders-left">
           <div className="orders-stats">
             {orderStats.map((stat) => (
-              <div key={stat.label} className="orders-stat-card" style={{ borderColor: stat.color }}>
+              <div key={stat.label} className="orders-stat-card" style={{ borderLeftColor: stat.color }}>
                 <span>{stat.label}</span>
                 <strong>{stat.value}</strong>
               </div>
@@ -134,158 +111,130 @@ const OrdersPage = () => {
           </div>
 
           <div className="orders-table-card">
-            <div className="table-card-header">
-              <div>
-                <span className="table-card-label">Orders</span>
-                <h3>Active restaurant requests</h3>
-              </div>
-              <button type="button" className="secondary-button small" onClick={() => setDetailsOpen(true)}>
-                View sample details
-              </button>
-            </div>
-            <Table columns={columns} data={filtered} />
+            <Table columns={columns} data={filtered} onView={handleSelectOrder} />
             <Pagination total={4} onPageChange={() => {}} />
           </div>
         </div>
 
+        {/* ── Right: Order Details Panel ── */}
         <aside className="orders-right-panel">
-          <div className="compact-order-card">
-            <div className="compact-header">
-              <div>
-                <span className="section-label">Order ID</span>
-                <strong>{orderDetails.id}</strong>
-              </div>
-              <StatusBadge label={orderStatus} variant={statusVariant(orderStatus)} />
+          <div className="order-panel">
+            <div className="panel-header">
+              <h3>Order Details</h3>
             </div>
 
-            <div className="compact-grid">
-              <div className="compact-item">
-                <span className="section-label">Customer</span>
-                <strong>{orderDetails.customer}</strong>
-                <p>{orderDetails.phone}</p>
+            {!selectedOrder ? (
+              <div className="panel-empty">
+                <ClipboardList className="panel-empty-icon" />
+                <p className="panel-empty-title">No order selected</p>
+                <p className="panel-empty-desc">Click the view icon on any order to see details</p>
               </div>
-              <div className="compact-item">
-                <span className="section-label">Address</span>
-                <strong>{orderDetails.address.line1}</strong>
-                <p>{orderDetails.address.line2}</p>
-              </div>
-              <div className="compact-item">
-                <span className="section-label">Items</span>
-                <strong>{itemsCount} items</strong>
-              </div>
-              <div className="compact-item">
-                <span className="section-label">Amount</span>
-                <strong>{formatCurrency(orderDetails.total)}</strong>
-              </div>
-              <div className="compact-item">
-                <span className="section-label">Payment</span>
-                <strong>{orderDetails.paymentMethod}</strong>
-              </div>
-            </div>
+            ) : (
+              <>
+                {/* ID + Status */}
+                <div className="panel-section">
+                  <div className="panel-order-header">
+                    <span className="panel-order-id">{selectedOrder.id}</span>
+                    <StatusBadge label={orderStatus} variant={statusVariant(orderStatus)} />
+                  </div>
+                </div>
 
-            <div className="section-divider" />
+                {/* Customer */}
+                <div className="panel-section">
+                  <div className="panel-section-title">
+                    <User size={12} />
+                    <span>Customer</span>
+                  </div>
+                  <p className="panel-field-value">{selectedOrder.customer}</p>
+                  <p className="panel-field-sub">{selectedOrder.email}</p>
+                  <p className="panel-field-sub">{selectedOrder.phone}</p>
+                </div>
 
-            <div className="status-update compact-status">
-              <label htmlFor="order-status">Update status</label>
-              <select id="order-status" value={orderStatus} onChange={(e) => setOrderStatus(e.target.value)}>
-                <option>Pending</option>
-                <option>Preparing</option>
-                <option>Completed</option>
-                <option>Cancelled</option>
-              </select>
-            </div>
+                {/* Address */}
+                <div className="panel-section">
+                  <div className="panel-section-title">
+                    <MapPin size={12} />
+                    <span>Delivery Address</span>
+                  </div>
+                  <p className="panel-field-value">{selectedOrder.address.line1}</p>
+                  <p className="panel-field-sub">{selectedOrder.address.line2}</p>
+                </div>
 
-            <button className="primary-button full-width" type="button" onClick={() => setDetailsOpen(true)}>
-              View Full Details
-            </button>
+                {/* Items */}
+                <div className="panel-section">
+                  <div className="panel-section-title">
+                    <ShoppingBag size={12} />
+                    <span>Items</span>
+                  </div>
+                  <div className="panel-items">
+                    {selectedOrder.items.map((item) => (
+                      <div key={item.name} className="panel-item-row">
+                        <span className="panel-item-name">{item.name}</span>
+                        <span className="panel-item-qty">×{item.qty}</span>
+                        <span className="panel-item-price">{formatCurrency(item.amount)}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Summary */}
+                <div className="panel-section">
+                  <div className="panel-section-title">
+                    <Receipt size={12} />
+                    <span>Summary</span>
+                  </div>
+                  <div className="panel-summary">
+                    <div className="panel-summary-row">
+                      <span>Subtotal</span>
+                      <span>{formatCurrency(selectedOrder.subtotal)}</span>
+                    </div>
+                    <div className="panel-summary-row">
+                      <span>Delivery</span>
+                      <span>{formatCurrency(selectedOrder.delivery)}</span>
+                    </div>
+                    <div className="panel-summary-row panel-summary-total">
+                      <span>Total</span>
+                      <span>{formatCurrency(selectedOrder.total)}</span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Payment */}
+                <div className="panel-section">
+                  <div className="panel-section-title">
+                    <CreditCard size={12} />
+                    <span>Payment</span>
+                  </div>
+                  <div className="panel-field-row">
+                    <span className="panel-field-label">Method</span>
+                    <span className="panel-field-value">{selectedOrder.payment}</span>
+                  </div>
+                  <div className="panel-field-row">
+                    <span className="panel-field-label">Transaction</span>
+                    <span className="panel-field-value">{selectedOrder.transactionId}</span>
+                  </div>
+                </div>
+
+                {/* Status Update */}
+                <div className="panel-section">
+                  <label className="panel-status-label" htmlFor="panel-order-status">Update Status</label>
+                  <select
+                    id="panel-order-status"
+                    className="panel-status-select"
+                    value={orderStatus}
+                    onChange={(e) => setOrderStatus(e.target.value)}
+                  >
+                    <option>Pending</option>
+                    <option>Preparing</option>
+                    <option>Completed</option>
+                    <option>Cancelled</option>
+                  </select>
+                </div>
+              </>
+            )}
           </div>
         </aside>
       </div>
-
-      <div className="mobile-order-summary">
-        <div className="mobile-summary-row">
-          <div>
-            <span>Order ID</span>
-            <strong>{orderDetails.id}</strong>
-          </div>
-          <StatusBadge label={orderStatus} variant={statusVariant(orderStatus)} />
-        </div>
-        <div className="mobile-summary-grid">
-          <div>
-            <p className="section-label">Customer</p>
-            <strong>{orderDetails.customer}</strong>
-            <p>{orderDetails.phone}</p>
-          </div>
-          <div>
-            <p className="section-label">Amount</p>
-            <strong>{formatCurrency(orderDetails.total)}</strong>
-          </div>
-        </div>
-        <button className="primary-button full-width" type="button" onClick={() => setDetailsOpen(true)}>
-          View Full Details
-        </button>
-      </div>
-
-      <Modal open={detailsOpen} title={`Order ${orderDetails.id} details`} onClose={() => setDetailsOpen(false)}>
-        <div className="modal-order-summary">
-          <div className="modal-order-row">
-            <div>
-              <span className="section-label">Customer</span>
-              <strong>{orderDetails.customer}</strong>
-              <p>{orderDetails.email}</p>
-              <p>{orderDetails.phone}</p>
-            </div>
-            <StatusBadge label={orderStatus} variant={statusVariant(orderStatus)} />
-          </div>
-          <div className="modal-section">
-            <span className="section-label">Delivery Address</span>
-            <p>{orderDetails.address.line1}</p>
-            <p>{orderDetails.address.line2}</p>
-            <p>{orderDetails.address.country}</p>
-          </div>
-          <div className="modal-section">
-            <div className="modal-section-header">
-              <span>Items</span>
-              <p>{itemsCount} items</p>
-            </div>
-            <ul className="modal-item-list">
-              {orderDetails.items.map((item) => (
-                <li key={item.name}>
-                  <div>
-                    <strong>{item.name}</strong>
-                    <p>Qty {item.qty}</p>
-                  </div>
-                  <span>{formatCurrency(item.amount)}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-          <div className="modal-summary-card">
-            <div className="summary-row">
-              <span>Subtotal</span>
-              <strong>{formatCurrency(orderDetails.subtotal)}</strong>
-            </div>
-            <div className="summary-row">
-              <span>Delivery</span>
-              <strong>{formatCurrency(orderDetails.delivery)}</strong>
-            </div>
-            <div className="summary-row">
-              <span>Discount</span>
-              <strong>{formatCurrency(orderDetails.discount)}</strong>
-            </div>
-            <div className="summary-row total-row">
-              <span>Total</span>
-              <strong>{formatCurrency(orderDetails.total)}</strong>
-            </div>
-          </div>
-          <div className="modal-section">
-            <span className="section-label">Payment</span>
-            <p>{orderDetails.paymentMethod}</p>
-            <p className="info-label">Transaction ID</p>
-            <p>{orderDetails.transactionId}</p>
-          </div>
-        </div>
-      </Modal>
     </div>
   );
 };
