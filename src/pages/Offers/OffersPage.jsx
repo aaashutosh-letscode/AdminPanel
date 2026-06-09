@@ -62,31 +62,120 @@ const OffersPage = () => {
         <aside className="offers-right-panel">
           <div className="offer-form-card">
             <Tabs
-              tabs={[
-                { key: 'details', label: 'Offer Details' },
-                { key: 'coupon', label: 'Coupon Settings' },
-                { key: 'usage', label: 'Usage Limits' }
-              ]}
-              onChange={setActiveTab}
-            />
-            <div className="offer-form-body">
-              <FormInput label="Offer Title" placeholder="Enter offer name" />
-              <TextArea label="Offer Description" placeholder="Describe the campaign details." rows={4} />
-              <SelectInput label="Offer Type" value="seasonal" onChange={() => {}} options={[{ value: 'seasonal', label: 'Seasonal' }, { value: 'holiday', label: 'Holiday' }]} />
-              <SelectInput label="Discount Type" value="percentage" onChange={() => {}} options={[{ value: 'percentage', label: 'Percentage' }, { value: 'fixed', label: 'Fixed Amount' }]} />
-              <FormInput label="Discount Value" placeholder="25%" />
-              <FormInput label="Minimum Order" placeholder="₹30" />
-              <FormInput label="Maximum Discount" placeholder="₹50" />
-              <div className="date-row">
-                <input type="date" />
-                <input type="date" />
-              </div>
-              <FormInput label="Offer Image" placeholder="Upload a banner" />
-            </div>
-            <div className="offer-form-footer">
-              <button type="button" className="btn btn-outline">Cancel</button>
-              <button type="button" className="btn btn-primary">Save Offer</button>
-            </div>
+  tabs={[
+    { key: 'details', label: 'Offer Details' },
+    { key: 'coupon', label: 'Coupon Settings' },
+    { key: 'usage', label: 'Usage Limits' }
+  ]}
+  onChange={setActiveTab}
+/>
+
+{activeTab === 'details' && (
+  <>
+    <div className="offer-form-body">
+      <FormInput label="Offer Title" placeholder="Enter offer name" />
+
+      <TextArea
+        label="Offer Description"
+        placeholder="Describe the campaign details."
+        rows={4}
+      />
+
+      <SelectInput
+        label="Offer Type"
+        value="seasonal"
+        onChange={() => {}}
+        options={[
+          { value: 'seasonal', label: 'Seasonal' },
+          { value: 'holiday', label: 'Holiday' }
+        ]}
+      />
+
+      <SelectInput
+        label="Discount Type"
+        value="percentage"
+        onChange={() => {}}
+        options={[
+          { value: 'percentage', label: 'Percentage' },
+          { value: 'fixed', label: 'Fixed Amount' }
+        ]}
+      />
+
+      <FormInput label="Discount Value" placeholder="25%" />
+      <FormInput label="Minimum Order" placeholder="₹30" />
+      <FormInput label="Maximum Discount" placeholder="₹50" />
+
+      <div className="date-row">
+        <input type="date" />
+        <input type="date" />
+      </div>
+
+      <FormInput label="Offer Image" placeholder="Upload a banner" />
+    </div>
+
+    <div className="offer-form-footer">
+      <button type="button" className="btn btn-outline">
+        Cancel
+      </button>
+
+      <button type="button" className="btn btn-primary">
+        Save Offer
+      </button>
+    </div>
+  </>
+)}
+
+{activeTab === 'coupon' && (
+  <>
+    <div className="offer-form-body">
+      <FormInput label="Coupon Code" placeholder="SAVE20" />
+
+      <SelectInput
+        label="Coupon Type"
+        value="percentage"
+        onChange={() => {}}
+        options={[
+          { value: 'percentage', label: 'Percentage' },
+          { value: 'fixed', label: 'Fixed Amount' }
+        ]}
+      />
+
+      <FormInput label="Coupon Value" placeholder="20%" />
+      <FormInput label="Maximum Uses" placeholder="100" />
+      <FormInput label="Per User Limit" placeholder="1" />
+    </div>
+
+    <div className="offer-form-footer">
+      <button type="button" className="btn btn-outline">
+        Cancel
+      </button>
+
+      <button type="button" className="btn btn-primary">
+        Save Coupon
+      </button>
+    </div>
+  </>
+)}
+
+{activeTab === 'usage' && (
+  <>
+    <div className="offer-form-body">
+      <FormInput label="Total Usage Limit" placeholder="500" />
+      <FormInput label="Usage Per Customer" placeholder="1" />
+      <FormInput label="Minimum Cart Value" placeholder="₹199" />
+    </div>
+
+    <div className="offer-form-footer">
+      <button type="button" className="btn btn-outline">
+        Cancel
+      </button>
+
+      <button type="button" className="btn btn-primary">
+        Save Limits
+      </button>
+    </div>
+  </>
+)}
           </div>
         </aside>
       </div>
